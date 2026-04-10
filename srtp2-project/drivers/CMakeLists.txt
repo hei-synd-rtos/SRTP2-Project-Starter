@@ -1,0 +1,3 @@
+add_subdirectory_ifdef(CONFIG_BLINK blink)
+add_subdirectory_ifdef(CONFIG_SENSOR sensor)
+add_subdirectory_ifdef(CONFIG_INPUT input)

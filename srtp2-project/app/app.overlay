@@ -1,0 +1,79 @@
+// Enable nunchuk input driver on i2c bus 1.
+// Note that setting the poll interval to 0 will disable periodic polling of the Nunchuk.
+&i2c1 {
+	nunchukng: nunchukng@52 {
+		reg = <0x52>;
+		compatible = "nintendo,nunchukng";
+		polling-interval-ms = <0>;
+	};
+};
+
+// Set custom MAC address. Note that the last byte should be your groups number.
+&mac {
+	local-mac-address = [ 00 80 E1 44 55 02 ];
+	/delete-property/ zephyr,random-mac-address;
+};
+
+// Enable random number generator.
+&rng {
+	status = "okay";
+};
+
+// Disable touch screen input driver.
+&ft5336 {
+	status = "disabled";
+};
+
+// HEI board I/O (4 LEDs and 4 Buttons).
+/ {
+	aliases {
+		extled0 = &ext_led_1;
+		extled1 = &ext_led_2;
+		extled2 = &ext_led_3;
+		extled3 = &ext_led_4;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		ext_led_1: led_1 {
+			gpios = <&gpioa 15 GPIO_ACTIVE_HIGH>;
+		};
+
+		ext_led_2: led_2 {
+			gpios = <&gpioh 6 GPIO_ACTIVE_HIGH>;
+		};
+
+		ext_led_3: led_3 {
+			gpios = <&gpioa 8 GPIO_ACTIVE_HIGH>;
+		};
+
+		ext_led_4: led_4 {
+			gpios = <&gpiob 4 GPIO_ACTIVE_HIGH>;
+		};
+	};
+
+	buttons {
+        compatible = "gpio-keys";
+
+        ext_btn0: btn0 {
+            gpios = <&gpioi 2 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            zephyr,code = <INPUT_BTN_0>;
+        };
+
+        ext_btn1: btn1 {
+            gpios = <&gpioi 3 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            zephyr,code = <INPUT_BTN_1>;
+        };
+
+        ext_btn2: btn2 {
+            gpios = <&gpiog 7 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            zephyr,code = <INPUT_BTN_2>;
+        };
+
+        ext_btn3: btn3 {
+            gpios = <&gpiog 6 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            zephyr,code = <INPUT_BTN_3>;
+        };
+    };
+};

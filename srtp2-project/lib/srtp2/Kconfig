@@ -1,0 +1,4 @@
+config SRTP2
+	bool "Support for SRTP2 protocol"
+	help
+	  This option enables the 'SRTP2' (Simple real-time Protocol v2 library

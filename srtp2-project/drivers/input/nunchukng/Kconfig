@@ -1,0 +1,7 @@
+config INPUT_NUNCHUKNG
+	bool "Nintendo Nunchuk joystick next gen driver with acceleration data"
+	default y
+	depends on DT_HAS_NINTENDO_NUNCHUKNG_ENABLED
+	select I2C
+	help
+	  This option enable the next gen driver for the Nintendo Nunchuk joystick.

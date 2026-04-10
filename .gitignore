@@ -1,0 +1,6 @@
+/build
+/modules
+/zephyr
+/.venv
+build
+.cache
